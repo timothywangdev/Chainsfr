@@ -136,10 +136,15 @@ const SelectCoin = (props: SelectCoinProps) => {
           <OutlinedInput labelWidth={100} name='Select Coin Type' value={selectedCryptoType} />
         }
         onChange={event => onSelect(event.target.value)}
+        inputProps={{ 'data-test-id': 'select_crypto' }}
       >
         {cryptoTypeList.map((cryptoType, index) => {
           return (
-            <MenuItem key={`cryptoType-${index}`} value={cryptoType}>
+            <MenuItem
+              key={`cryptoType-${index}`}
+              value={cryptoType}
+              data_test-id={`crypto_item_${cryptoType}`}
+            >
               <Box display='flex' alignItems='center'>
                 <Box mr={1} display='inline'>
                   {/* wallet icon */}
@@ -257,6 +262,7 @@ const WalletList = (props: WalletListProps) => {
               onClick={() => {
                 onSelect(w.walletType)
               }}
+              data-test-id={`wallet_item_${w.walletType}`}
             >
               <Box display='flex' flexDirection='row' alignItems='center'>
                 <Box mr={1}>
@@ -404,6 +410,7 @@ const WalletConnectAction = (props: WalletConnectActionProps) => {
         }}
         variant='contained'
         disabled={cryptoTypes.length === 0}
+        data-test-id='authorize_btn'
       >
         {buttonIcon}
         {buttonText}
@@ -601,6 +608,10 @@ const NameNewAccounts = (props: NameNewAccountsProps) => {
             }}
             value={name}
             disabled={walletType === 'coinbaseOAuthWallet'}
+            // data-test-id='new_accounts_name_text_field'
+            InputProps={{
+              'data-test-id': 'new_accounts_name_text_field'
+            }}
           />
         </Box>
         <Box mt={1} display='flex' alignItems='center' justifyContent='space-between'>
@@ -750,6 +761,7 @@ const AddAccountModalComponent = (props: AddAccountModalComponentProps) => {
             onClick={() => {
               onSubmit(newCryptoAccounts, name)
             }}
+            data-test-id='save_btn'
           >
             Save
           </Button>
